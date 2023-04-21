@@ -3,7 +3,7 @@
 <head>
   <title>Goose Alert</title>
 </head>
-<body>
+<body style="overflow: hidden">
   <center>
     <img src="canadagoose.webp" />
     <h1 style="color: red">Goose Alert!!</h1>
@@ -49,5 +49,70 @@
     const audio = new Audio("canada_goose.mp3");
     audio.loop = true;
     audio.play();
+
+    // make multiple copies of an image fly across the screen repeatedly
+    const img = document.createElement("img");
+    img.src = "goose.png";
+    img.style.position = "absolute";
+    img.style.width = "100px";
+    img.style.top = "100px";
+    img.style.left = "0px";
+    img.style.transform = "translateX(110vw)";
+    document.body.appendChild(img);
+
+    const img2 = document.createElement("img");
+    img2.src = "goose.png";
+    img2.style.position = "absolute";
+    img2.style.width = "100px";
+    img2.style.top = "150px";
+    img2.style.left = "0px";
+    img2.style.transform = "translateX(120vw)";
+    document.body.appendChild(img2);
+
+    const img3 = document.createElement("img");
+    img3.src = "goose.png";
+    img3.style.position = "absolute";
+    img3.style.width = "100px";
+    img3.style.top = "220px";
+    img3.style.left = "0px";
+    img3.style.transform = "translateX(102vw)";
+    document.body.appendChild(img3);
+
+    const img4 = document.createElement("img");
+    img4.src = "goose.png";
+    img4.style.position = "absolute";
+    img4.style.width = "100px";
+    img4.style.top = "300px";
+    img4.style.left = "0px";
+    img4.style.transform = "translateX(122vw)";
+    document.body.appendChild(img4);
+
+    const img5 = document.createElement("img");
+    img5.src = "goose.png";
+    img5.style.position = "absolute";
+    img5.style.width = "100px";
+    img5.style.top = "500px";
+    img5.style.left = "0px";
+    img5.style.transform = "translateX(115vw)";
+    document.body.appendChild(img5);
+
+    const img6 = document.createElement("img");
+    img6.src = "goose.png";
+    img6.style.position = "absolute";
+    img6.style.width = "100px";
+    img6.style.top = "600px";
+    img6.style.left = "0px";
+    img6.style.transform = "translateX(105vw)";
+    document.body.appendChild(img6);
+
+    // make the images fly from right to left in a loop
+    setInterval(() => {
+      img.style.left = `${parseInt(img.style.left) - 1}px`;
+      img2.style.left = `${parseInt(img2.style.left) - 1}px`;
+      img3.style.left = `${parseInt(img3.style.left) - 1}px`;
+      img4.style.left = `${parseInt(img4.style.left) - 1}px`;
+      img5.style.left = `${parseInt(img5.style.left) - 1}px`;
+      img6.style.left = `${parseInt(img6.style.left) - 1}px`;
+    }, 16);
   </script>
 </body>
