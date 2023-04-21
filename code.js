@@ -103,3 +103,24 @@ app.use(express.static("public"));
 app.listen(3000, function () {
   console.log("Server is listening on port 3000. Ready to accept requests!");
 });
+
+// alert endpoint
+app.get("/alert", function (request, response) {
+  // parse flights2.json
+  var flights = fs.readFileSync("flights2.json", "utf8");
+  flights = JSON.parse(flights);
+
+  // get an array of aircrafts
+  var aircrafts = flights.aircraft;
+
+  // sort aircrafts by altitude closes to 1115
+  aircrafts.sort(function (a, b) {
+    return Math.abs(a[5] - 1115) - Math.abs(b[5] - 1115);
+  });
+
+  // get the first 3 aircrafts
+  aircrafts = aircrafts.slice(0, 3);
+
+  // return json response
+  response.json(aircrafts);
+});

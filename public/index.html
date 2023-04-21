@@ -1,4 +1,36 @@
-<center>
-  <img src="canadagoose.webp" />
-  <h1 style="color: red">Goose Alert!!</h1>
-</center>
+<!DOCTYPE html>
+
+<head>
+  <title>Goose Alert</title>
+</head>
+<body>
+  <center>
+    <img src="canadagoose.webp" />
+    <h1 style="color: red">Goose Alert!!</h1>
+    <h2>High Risk Flights!</h2>
+    <ul
+      id="aircrafts"
+      style="display: inline-block; list-style: none; text-align: left"
+    ></ul>
+  </center>
+  <script type="text/javascript">
+    fetch("http://localhost:3000/alert")
+      .then((data) => data.json())
+      .then((json) => {
+        // insert list item into ul#aircrafts for each aircraft
+        json.forEach((aircraft) => {
+          const li = document.createElement("li");
+          li.innerText = `${aircraft[9]} (${aircraft[1]})`;
+
+          const img = document.createElement("img");
+          img.src = `${aircraft[9]}.jpg`;
+          img.style.width = "100px";
+
+          // prepend img to li
+          li.insertBefore(img, li.firstChild);
+
+          document.getElementById("aircrafts").appendChild(li);
+        });
+      });
+  </script>
+</body>
