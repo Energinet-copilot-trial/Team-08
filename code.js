@@ -106,21 +106,32 @@ app.listen(3000, function () {
 
 // alert endpoint
 app.get("/alert", function (request, response) {
-  // parse flights2.json
-  var flights = fs.readFileSync("flights2.json", "utf8");
-  flights = JSON.parse(flights);
+  var url =
+    "https://flight-radar1.p.rapidapi.com/flights/list-in-boundary?bl_lat=-50&bl_lng=-150&tr_lat=60&tr_lng=-20&limit=300&altitude=1%2C13000";
 
-  // get an array of aircrafts
-  var aircrafts = flights.aircraft;
+  var options = {
+    method: "GET",
+    headers: {
+      "X-RapidAPI-Key": "1593aa5d52mshaccb1f298cf9d5ap16d9a1jsne2852856a241",
+      "X-RapidAPI-Host": "flight-radar1.p.rapidapi.com",
+    },
+  };
 
-  // sort aircrafts by altitude closes to 1115
-  aircrafts.sort(function (a, b) {
-    return Math.abs(a[5] - 1115) - Math.abs(b[5] - 1115);
-  });
+  fetch(url, options)
+    .then((res) => res.json())
+    .then((flights) => {
+      // get an array of aircrafts
+      var aircrafts = flights.aircraft;
 
-  // get the first 3 aircrafts
-  aircrafts = aircrafts.slice(0, 3);
+      // sort aircrafts by altitude closes to 1115
+      aircrafts.sort(function (a, b) {
+        return Math.abs(a[5] - 1115) - Math.abs(b[5] - 1115);
+      });
 
-  // return json response
-  response.json(aircrafts);
+      // get the first 3 aircrafts
+      aircrafts = aircrafts.slice(0, 5);
+
+      // return json response
+      response.json(aircrafts);
+    });
 });
