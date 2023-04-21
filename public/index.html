@@ -25,7 +25,7 @@
         // insert list item into ul#aircrafts for each aircraft
         json.forEach((aircraft) => {
           const li = document.createElement("li");
-          li.innerText = ` ${aircraft[9]} (${aircraft[1]})`;
+          li.innerText = ` ${aircraft[9]}: `;
 
           const img = document.createElement("img");
           img.src = `https://www.skybrary.aero/sites/default/files/${aircraft[9]}.jpg`;
@@ -33,6 +33,13 @@
 
           // prepend img to li
           li.insertBefore(img, li.firstChild);
+
+          // append link to li
+          const link = document.createElement("a");
+          link.href = `https://www.flightradar24.com/${aircraft[1]}/${aircraft[0]}`;
+          link.innerText = aircraft[1];
+          link.referrerPolicy = "no-referrer";
+          li.appendChild(link);
 
           document.getElementById("aircrafts").appendChild(li);
         });
